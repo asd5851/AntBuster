@@ -5,6 +5,7 @@ using UnityEngine;
 public class S_BulletMove : MonoBehaviour
 {
     // Start is called before the first frame update
+    GameObject ant = default;
     void Start()
     {
         
@@ -13,6 +14,8 @@ public class S_BulletMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.position = Vector3.MoveTowards(transform.position, ant.transform.position, Time.deltaTime);
     }
+
+    
 }

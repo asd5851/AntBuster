@@ -6,6 +6,15 @@ public class S_AntControl : MonoBehaviour
 {
     private GameObject cake;
     private GameObject antSpawn;
+    int hp = default;
+    public int HP
+    {
+        get
+        {
+            return hp;
+        }
+    }
+
     bool goWhere = false;
     // Start is called before the first frame update
     void Start()
@@ -38,14 +47,14 @@ public class S_AntControl : MonoBehaviour
     //! 개미가 케이크를 만났을 때
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("만낫니");
         if(other.gameObject.tag == "Cake")
         {
             goWhere = true;
             // 개미의 애니메이션을 변경한다.
         }
-        else if(other.tag == "AntSpawn")
+        else if(other.gameObject.tag == "AntSpawn")
         {
+            Debug.Log("만낫니");
             goWhere = false;
         }
     }
