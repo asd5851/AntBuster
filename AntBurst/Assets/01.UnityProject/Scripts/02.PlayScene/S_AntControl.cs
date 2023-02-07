@@ -8,6 +8,8 @@ public class S_AntControl : MonoBehaviour
     private GameObject antSpawn;
     public Sprite []antImg = default;
     int hp = 10;
+    float delay_cur = 0f;
+    float delay_max = 3f;
     public int HP
     {
         get
@@ -36,7 +38,9 @@ public class S_AntControl : MonoBehaviour
     void Update()
     {
         if(!goWhere)
+        {        
             MoveCake();
+        }
         else{
             MoveSpawn();
         }
@@ -44,8 +48,29 @@ public class S_AntControl : MonoBehaviour
     //! 개미가 케이크로 움직인다.
     void MoveCake()
     {
+        
+        int randMove = Random.Range(0,6);
+        delay_cur = delay_cur + Time.deltaTime;
+        if(delay_max > delay_cur)
+        {
+            return;
+        }
+        delay_cur = 0;
+        //myTransform.Translate(moveAmount);
+        Debug.Log(randMove);
+        if(randMove <= 3)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, cake.transform.position, Time.deltaTime);
+        }
+        else if(randMove >= 4)
+        {
+            transform.Translate(Vector3.up*Time.deltaTime);
+        }
+        else if(randMove == 5)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, Vector3.left, Time.deltaTime);
+        }
        //transform.position = Vector2.MoveTowards(transform.position, Vector2.up, Time.deltaTime);
-       transform.position = Vector3.MoveTowards(transform.position, cake.transform.position, Time.deltaTime);
     }
 
     //! 개미가 스폰지점으로 움직인다.
