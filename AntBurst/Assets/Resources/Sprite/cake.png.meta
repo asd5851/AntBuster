@@ -117,27 +117,6 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cake_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 68
-        width: 60
-        height: 60
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 86a4a28aeb668014491179968f944ba4
-      internalID: 1617888282
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: cake_1
       rect:
         serializedVersion: 2
@@ -284,6 +263,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: cake_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 68
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1582355142a638345b53c600e3ad202e
+      internalID: 1248934446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cake_8
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 38
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18d89dd22f01fd5488e9365471d22030
+      internalID: 800497192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -296,7 +317,8 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       cake_1: -1365138651
-      cake_0: 1617888282
+      cake_0: 1248934446
+      cake_8: 800497192
       cake_7: -1778767925
       cake_5: -841747134
       cake_3: -1947956459

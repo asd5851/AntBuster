@@ -36,12 +36,8 @@ public class S_CanonPosition : MonoBehaviour
          mousePosition3D.x = mousePosition.x;
          mousePosition3D.y = mousePosition.y;
          mousePosition3D.z = 0;
-         Instantiate(canon,backBoard.transform);
-         canon.transform.position = mousePosition;
-         
-         //canon.transform.parent = backBoard.transform;
-         
-         
+         Instantiate(canon,mousePosition3D,Quaternion.identity,backBoard.transform);
+         GameManager.Instance.SpendMoney();
          gameObject.SetActive(false);
        }
        // } 마우스 왼쪽 버튼을 누르면 캐논이 생성된다.

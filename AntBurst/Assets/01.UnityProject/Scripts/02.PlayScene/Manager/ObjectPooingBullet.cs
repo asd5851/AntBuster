@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPoolingAnt : MonoBehaviour
+public class ObjectPooingBullet : MonoBehaviour
 {
-    // instance라는 변수를 static으로 선언을 하여 다른 오브젝트 안의 스크립트 에서도 instatnce
+     // instance라는 변수를 static으로 선언을 하여 다른 오브젝트 안의 스크립트 에서도 instatnce
     // 를 불러올 수 있게 한다.
-    public static ObjectPoolingAnt instance; // 오브젝트 풀링 사용할 instance
+    public static ObjectPooingBullet instance; // 오브젝트 풀링 사용할 instance
    GameObject Object_Prefab; // 받아올 게임 오브젝트
    bool b_enemy;
    // 적 총을 담아둘 큐를 선언한다.
    public Queue<GameObject> Object_Queue = new Queue<GameObject>();
    
    private void Awake(){
-    Object_Prefab = Resources.Load("Prefabs/Ant")as GameObject;
+    Object_Prefab = Resources.Load("Prefabs/Bullet")as GameObject;
     instance = this;
     Initiallize();
    }
@@ -21,7 +21,7 @@ public class ObjectPoolingAnt : MonoBehaviour
    //오브젝트 생성한다.
    private GameObject CreateNewObject(){
     //오브젝트를 가져와서 인스턴스로 생성한다.
-      var newObj = Instantiate(Object_Prefab,GameObject.Find("GameObjs").transform);
+      var newObj = Instantiate(Object_Prefab,GameObject.Find("Canon").transform);
       newObj.gameObject.SetActive(false);
       return newObj;
    }
@@ -45,17 +45,19 @@ public class ObjectPoolingAnt : MonoBehaviour
     
     else{
         // 큐가 없다면 새로 만들어서 obj에 할당한 후 리턴한다.
-        Debug.Log("큐없을떄");
-        var obj = instance.CreateNewObject();
-       //s obj.transform.SetParent(null);
-        obj.gameObject.SetActive(true);
-        return obj;
+    //     Debug.Log("큐없을떄");
+    //     var obj = instance.CreateNewObject();
+    //    //s obj.transform.SetParent(null);
+    //     obj.gameObject.SetActive(true);
+        //return obj;
     }
+    return null;
 
    }
    // 사용한 오브젝트을 안보이게 만든 후 큐에 넣는다.
    public static void ReturnObject(GameObject enemyBullet){
     enemyBullet.gameObject.SetActive(false);
+    //enemyBullet.transform.SetParent(instance.transform);
     instance.Object_Queue.Enqueue(enemyBullet);
    }
 }

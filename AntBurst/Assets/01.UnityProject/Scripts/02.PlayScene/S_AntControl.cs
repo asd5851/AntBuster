@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class S_AntControl : MonoBehaviour
 {
     private GameObject cake;
     private GameObject antSpawn;
-    int hp = default;
+    public Sprite []antImg = default;
+    int hp = 10;
     public int HP
     {
         get
@@ -17,10 +18,18 @@ public class S_AntControl : MonoBehaviour
 
     bool goWhere = false;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         antSpawn = GameObject.Find("AntSpawn");
         cake = GameObject.Find("Cake");
+    }
+    void OnEnable()
+    {
+        hp = 10;
+    }
+    void Start()
+    {
+        
     }
 
     // Update is called once per frame
@@ -35,7 +44,8 @@ public class S_AntControl : MonoBehaviour
     //! 개미가 케이크로 움직인다.
     void MoveCake()
     {
-        transform.position = Vector3.MoveTowards(transform.position, cake.transform.position, Time.deltaTime);
+       //transform.position = Vector2.MoveTowards(transform.position, Vector2.up, Time.deltaTime);
+       transform.position = Vector3.MoveTowards(transform.position, cake.transform.position, Time.deltaTime);
     }
 
     //! 개미가 스폰지점으로 움직인다.
@@ -44,18 +54,35 @@ public class S_AntControl : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, antSpawn.transform.position, Time.deltaTime);
     }
 
-    //! 개미가 케이크를 만났을 때
+    //! 개미가 다른 오브젝트를 만났을 때
     void OnTriggerEnter2D(Collider2D other)
     {
+        // 케이크를 만났을 때
         if(other.gameObject.tag == "Cake")
         {
             goWhere = true;
-            // 개미의 애니메이션을 변경한다.
+            // 개미의 이미지 변경한다.
+            gameObject.GetComponent<Image>().sprite = antImg[1];
         }
+        // 개미구멍을 만났을 때
         else if(other.gameObject.tag == "AntSpawn")
         {
             Debug.Log("만낫니");
+            // 개미의 이미지를 변경한다.
+            gameObject.GetComponent<Image>().sprite = antImg[0];
             goWhere = false;
+        }
+        // 총알을 만났을 때
+        else if(other.gameObject.tag == "Bullet")
+        {
+            hp -= other.GetComponent<S_BulletMove>().bulletDamage;
+            Debug.Log($"hp = {hp}");
+            if(hp<=0)
+            {
+                ObjectPoolingAnt.ReturnObject(gameObject);
+                GameManager.Instance.GetScore();
+                GameManager.Instance.GetMoney();
+            }
         }
     }
 }
